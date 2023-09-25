@@ -1,0 +1,281 @@
+<nav class="bg-white">
+  <div class="mx-auto max-w-7xl px-2 py-2 sm:px-6 lg:py-4 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          (click)="toggleMenu()"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <!--
+                Icon when menu is closed.
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="black"
+            aria-hidden="true"
+            [ngClass]="isMenuOpen ? 'hidden' : 'block'"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+          <!--
+                Icon when menu is open.
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="black"
+            aria-hidden="true"
+            [ngClass]="isMenuOpen ? 'block' : 'hidden'"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between"
+      >
+        <div class="flex flex-shrink-0 items-center">
+          <img
+            routerLink=""
+            class="h-8 w-auto cursor-pointer logo"
+            src="assets/images/logo.svg"
+            alt="holdz logo"
+          />
+          <!-- todo -->
+
+          <div
+            class="hidden ml-6 sm:block flex items-center justify-center bg-gray rounded-2xl"
+          >
+            <form method="GET">
+              <div class="relative text-black focus-within:text-black">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                  <button
+                    type="submit"
+                    class="p-1 focus:outline-none focus:shadow-outline"
+                  >
+                    <svg
+                      fill="none"
+                      stroke="gray"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      ></path>
+                    </svg>
+                  </button>
+                </span>
+                <input
+                  type="search"
+                  name="q"
+                  class="py-2 text-sm text-black bg-gray pl-10 focus:outline-none rounded-2xl w-64 pr-2"
+                  placeholder="Search for symbol ex, AAPL"
+                  autocomplete="off"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-3 items-baseline">
+            <a
+              routerLink="home"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              routerLinkActive="active"
+              >Home</a
+            >
+            <a
+              routerLink="favorites"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              routerLinkActive="active"
+              >Favorites</a
+            >
+            <a
+              routerLink="about"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              routerLinkActive="active"
+              >About</a
+            >
+            <a
+              routerLink="help"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              routerLinkActive="active"
+              >Help</a
+            >
+            <a
+              class="bg-gray text-black py-2 px-4 rounded-md"
+              routerLink="login"
+            >
+              Login
+            </a>
+            <a
+              class="bg-black text-white py-2 px-4 rounded-md"
+              href="https://play.google.com/store/apps"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get the App
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
+        <!-- Mobile search button-->
+        <button
+          type="button"
+          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          aria-controls="search-bar"
+          aria-expanded="false"
+          (click)="toggleSearch()"
+        >
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open search bar</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="black"
+            class="w-8 h-8"
+            [ngClass]="isSearchOpen ? 'hidden' : 'block'"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="black"
+            aria-hidden="true"
+            [ngClass]="isSearchOpen ? 'block' : 'hidden'"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div id="mobile-menu" [ngClass]="isMenuOpen ? 'block' : 'hidden'">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+      <a
+        routerLink="home"
+        class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
+        >Home</a
+      >
+      <a
+        routerLink="favorites"
+        class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
+        >Favorites</a
+      >
+      <a
+        routerLink="about"
+        class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
+        >About</a
+      >
+      <a
+        routerLink="help"
+        class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
+        >Help</a
+      >
+      <div class="flex gap-4">
+        <a
+          class="bg-gray text-black ml-2 py-2 px-4 rounded-md"
+          routerLink="login"
+          (click)="toggleMenu()"
+        >
+          Login
+        </a>
+        <a
+          class="bg-black text-white py-2 px-4 rounded-md"
+          href="https://play.google.com/store/apps"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="toggleMenu()"
+        >
+          Get the App
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- search icon on small screens -->
+  <div
+    id="search-bar"
+    class="px-4 sm:hidden"
+    [ngClass]="isSearchOpen ? 'block' : 'hidden'"
+  >
+    <form method="GET">
+      <div class="relative text-black focus-within:text-black">
+        <span class="absolute inset-y-0 left-0 flex items-center">
+          <button type="submit" class="focus:outline-none focus:shadow-outline">
+            <svg
+              fill="none"
+              stroke="black"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              class="pl-2 mr-4 w-8 h-8"
+            >
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </span>
+        <input
+          type="search"
+          name="q"
+          class="py-2 text-md text-black bg-gray pl-10 focus:outline-none rounded-2xl w-full pr-2"
+          placeholder="Search for symbol ex, AAPL"
+          autocomplete="off"
+        />
+      </div>
+    </form>
+  </div>
+</nav>
