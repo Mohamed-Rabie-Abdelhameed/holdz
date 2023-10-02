@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* scrollbar.css */
+
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f2f2f2; /* Use your gray color from the theme */
+  border-radius: 10px;
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #f5ec47; /* Use your yellow color from the theme */
+  border-radius: 10px;
+}
+
+::selection {
+  background-color: #f5ec47; /* Use your desired background color */
+  color: #020202; /* Use your desired text color */
+}
+
+/* Style for selected text in Firefox */
+::-moz-selection {
+  background-color: #f5ec47; /* Use your desired background color */
+  color: #020202; /* Use your desired text color */
+}
