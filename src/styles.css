@@ -6,7 +6,7 @@
 
 /* Set the width of the scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 /* Style the scrollbar track */

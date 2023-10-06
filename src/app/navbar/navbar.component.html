@@ -106,32 +106,32 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-3 items-baseline">
             <a
-              routerLink="home"
+              routerLink="/home"
               class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
               routerLinkActive="active"
               >Home</a
             >
             <a
-              routerLink="favorites"
+              routerLink="/favorites"
               class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
               routerLinkActive="active"
               >Favorites</a
             >
             <a
-              routerLink="about"
+              routerLink="/about"
               class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
               routerLinkActive="active"
               >About</a
             >
             <a
-              routerLink="help"
+              routerLink="/help"
               class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
               routerLinkActive="active"
               >Help</a
             >
             <a
               class="bg-gray text-black py-2 px-4 rounded-md"
-              routerLink="login"
+              routerLink="/sign-in"
             >
               Login
             </a>
@@ -197,28 +197,28 @@
   <div id="mobile-menu" [ngClass]="isMenuOpen ? 'block' : 'hidden'">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <a
-        routerLink="home"
+        routerLink="/home"
         class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="active"
         (click)="toggleMenu()"
         >Home</a
       >
       <a
-        routerLink="favorites"
+        routerLink="/favorites"
         class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="active"
         (click)="toggleMenu()"
         >Favorites</a
       >
       <a
-        routerLink="about"
+        routerLink="/about"
         class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="active"
         (click)="toggleMenu()"
         >About</a
       >
       <a
-        routerLink="help"
+        routerLink="/help"
         class="text-black font-sans hover:text-gray-dark block rounded-md px-3 py-2 text-base font-medium"
         routerLinkActive="active"
         (click)="toggleMenu()"
@@ -227,7 +227,7 @@
       <div class="flex gap-4">
         <a
           class="bg-gray text-black ml-2 py-2 px-4 rounded-md"
-          routerLink="login"
+          routerLink="/sign-in"
           (click)="toggleMenu()"
         >
           Login
