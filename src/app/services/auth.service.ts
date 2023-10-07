@@ -7,7 +7,8 @@ import {
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-
+import { initializeApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -51,28 +52,30 @@ export class AuthService {
       });
   }
 
-
   // Sign in with Google
+  firebaseApp = initializeApp(environment.firebase);
+  auth = auth.getAuth(this.firebaseApp);
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
-  // Auth logic to run auth providers
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
+
+  AuthLogin(provider) {
+    return auth.signInWithPopup(this.auth, provider, auth.browserPopupRedirectResolver)
       .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
+      
       })
       .catch((error) => {
-        window.alert(error);
+        console.log(error);
       });
   }
 
   // Sign up with email/password
   SignUp(email: string, password: string) {
+    console.log(email);
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {

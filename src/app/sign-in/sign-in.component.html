@@ -47,16 +47,291 @@
 </div> -->
 
 <div class="lg:flex flex-column">
-  <div class="lg:flex-auto flex-1 lg:w-2/3">gdg</div>
-  <div class="lg:flex-auto flex-1 lg:w-1/3">
+  <div class="lg:flex-auto flex-1 lg:w-1/2">
+    <!-- <div class="flex-column bg-gray rounded-3xl my-4 mx-4 px-12 py-6">
+      <img
+        src="assets/images/logo.svg"
+        alt="holdz logo"
+        class="w-24 h-24 mb-8"
+      />
+      <h3 class="font-display font-bold text-3xl mb-4">Sign In</h3>
+      <p class="font-sans text-lg text-gray-dark ">Sign in to your account to access your portfolio.</p>
+      <div class="formGroup">
+        <input
+          type="text"
+          class="formControl"
+          placeholder="Email"
+          #userEmail
+          required
+        />
+      </div>
+      <div class="formGroup">
+        <input
+          type="password"
+          class="formControl"
+          placeholder="Password"
+          #userPassword
+          required
+        />
+      </div>
+      <div class="formGroup">
+        <input
+          type="button"
+          class="btn btnPrimary"
+          value="Log in"
+          (click)="authService.SignIn(userEmail.value, userPassword.value)"
+        />
+      </div>
+      <div class="formGroup">
+        <span class="or"><span class="orInner">Or</span></span>
+      </div>
+      <div class="forgotPassword">
+        <span routerLink="/forgot-password">Forgot Password?</span>
+      </div>
+
+      <div class="redirectToLogin text-gray-dark">
+        <span
+          >Don't have an account?<span class="redirect text-black font-bold" routerLink="/sign-up">
+            Sign Up</span
+          ></span
+        >
+        </div>
+    </div> -->
+
+    <section class="lg:my-4 lg:mx-4 rounded-3xl">
+      <div
+        class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+      >
+        <a routerLink="/" class="hidden lg:block mb-4">
+          <img class="w-24" src="assets/images/logo.svg" alt="logo" />
+        </a>
+        <div
+          class="w-full bg-white rounded-lg shadow-lg md:mt-0 sm:max-w-md xl:p-0"
+        >
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <div>
+              <h1
+                class="text-xl font-display font-bold leading-tight tracking-tight md:text-2xl mb-2"
+              >
+                Sign in
+              </h1>
+              <p class="text-sm font-light text-gray-dark">
+                Sign in to your account to access your portfolio.
+              </p>
+            </div>
+            <form
+              class="space-y-4 md:space-y-6"
+              #signInForm="ngForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div>
+                <label for="email" class="block mb-2 text-sm font-medium"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="bg-gray shadow text-gray-dark sm:text-sm rounded-lg block w-full p-2.5"
+                  placeholder="email@example.com"
+                  required
+                  [(ngModel)]="userEmail"
+                  #emailInput="ngModel"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                />
+                <div
+                  *ngIf="
+                    emailInput.invalid &&
+                    (emailInput.dirty || emailInput.touched)
+                  "
+                  class="text-red text-sm font-medium mt-2"
+                >
+                  <div *ngIf="emailInput.errors.required">
+                    Email is required.
+                  </div>
+                  <div *ngIf="emailInput.errors.pattern">
+                    Please enter a valid email address.
+                  </div>
+                </div>
+              </div>
+              <div class="relative">
+                <label for="password" class="block mb-2 text-sm font-medium"
+                  >Password</label
+                >
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  class="bg-gray shadow text-gray-dark sm:text-sm rounded-lg block w-full p-2.5"
+                  required
+                  minlength="6"
+                  [(ngModel)]="userPassword"
+                  #passwordInput="ngModel"
+                />
+                <button
+                  type="button"
+                  class="text-sm text-gray-dark hover:underline absolute right-0 top-8 mt-1.5 mr-4"
+                  (click)="togglePasswordVisibility()"
+                >
+                  <!-- {{ showPassword ? "Hide Password" : "Show Password" }} -->
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0"
+                    y="0"
+                    viewBox="0 0 511.999 511.999"
+                    style="enable-background: new 0 0 512 512"
+                    xml:space="preserve"
+                    class="w-6 h-6 inline-block text-gray-dark"
+                    *ngIf="!showPassword"
+                  >
+                    <g>
+                      <path
+                        d="M508.745 246.041c-4.574-6.257-113.557-153.206-252.748-153.206S7.818 239.784 3.249 246.035a16.896 16.896 0 0 0 0 19.923c4.569 6.257 113.557 153.206 252.748 153.206s248.174-146.95 252.748-153.201a16.875 16.875 0 0 0 0-19.922zM255.997 385.406c-102.529 0-191.33-97.533-217.617-129.418 26.253-31.913 114.868-129.395 217.617-129.395 102.524 0 191.319 97.516 217.617 129.418-26.253 31.912-114.868 129.395-217.617 129.395z"
+                        fill="#000000"
+                        opacity="0.5"
+                        data-original="#000000"
+                      ></path>
+                      <path
+                        d="M255.997 154.725c-55.842 0-101.275 45.433-101.275 101.275s45.433 101.275 101.275 101.275S357.272 311.842 357.272 256s-45.433-101.275-101.275-101.275zm0 168.791c-37.23 0-67.516-30.287-67.516-67.516s30.287-67.516 67.516-67.516 67.516 30.287 67.516 67.516-30.286 67.516-67.516 67.516z"
+                        fill="#000000"
+                        opacity="0.5"
+                        data-original="#000000"
+                      ></path>
+                    </g>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0"
+                    y="0"
+                    viewBox="0 0 128 128"
+                    style="enable-background: new 0 0 512 512"
+                    xml:space="preserve"
+                    class="w-6 h-6 inline-block text-gray-dark"
+                    *ngIf="showPassword"
+                  >
+                    <g>
+                      <path
+                        d="m79.891 65.078 7.27-7.27C87.69 59.787 88 61.856 88 64c0 13.234-10.766 24-24 24-2.144 0-4.213-.31-6.192-.839l7.27-7.27a15.929 15.929 0 0 0 14.813-14.813zm47.605-3.021c-.492-.885-7.47-13.112-21.11-23.474l-5.821 5.821c9.946 7.313 16.248 15.842 18.729 19.602C114.553 71.225 95.955 96 64 96c-4.792 0-9.248-.613-13.441-1.591l-6.573 6.573C50.029 102.835 56.671 104 64 104c41.873 0 62.633-36.504 63.496-38.057a3.997 3.997 0 0 0 0-3.886zm-16.668-39.229-88 88C22.047 111.609 21.023 112 20 112s-2.047-.391-2.828-1.172a3.997 3.997 0 0 1 0-5.656l11.196-11.196C10.268 83.049 1.071 66.964.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24c10.827 0 20.205 2.47 28.222 6.122l12.95-12.95c1.563-1.563 4.094-1.563 5.656 0s1.563 4.094 0 5.656zM34.333 88.011 44.46 77.884C41.663 73.96 40 69.175 40 64c0-13.234 10.766-24 24-24 5.175 0 9.96 1.663 13.884 4.459l8.189-8.189C79.603 33.679 72.251 32 64 32 32.045 32 13.447 56.775 8.707 63.994c3.01 4.562 11.662 16.11 25.626 24.017zm15.934-15.935 21.809-21.809C69.697 48.862 66.958 48 64 48c-8.822 0-16 7.178-16 16 0 2.958.862 5.697 2.267 8.076z"
+                        fill="#000000"
+                        opacity="0.5"
+                        data-original="#000000"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+                <div
+                  *ngIf="
+                    passwordInput.invalid &&
+                    (passwordInput.dirty || passwordInput.touched)
+                  "
+                  class="text-red text-sm font-medium mt-2"
+                >
+                  <div *ngIf="passwordInput.errors.required">
+                    Password is required.
+                  </div>
+                  <div *ngIf="passwordInput.errors.minlength">
+                    Password must be at least 6 characters long.
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end">
+                <a
+                  routerLink="/forgot-password"
+                  class="text-sm font-medium hover:underline"
+                  >Forgot password?</a
+                >
+              </div>
+              <button
+                type="submit"
+                class="w-full text-white bg-black focus:ring-4 focus:outline-none focus:ring-yellow font-medium rounded-lg text-md px-5 py-2.5 text-center"
+                [disabled]="!signInForm.form.valid"
+                [ngClass]="{
+                  'bg-gray-dark': !signInForm.form.valid,
+                  'bg-black': signInForm.form.valid
+                }"
+              >
+                Sign in
+              </button>
+              <!-- sign in with google -->
+              <div class="flex-column items-center justify-center">
+                <p class="text-center mb-4">Or</p>
+                <button
+                  type="button"
+                  class="w-full text-black bg-white border border-gray shadow focus:ring-4 focus:outline-none focus:border-0 focus:ring-yellow font-medium rounded-lg text-md px-5 py-2.5 text-center"
+                  (click)="authService.GoogleAuth()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    version="1.1"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0"
+                    y="0"
+                    viewBox="0 0 512 512"
+                    style="enable-background: new 0 0 512 512"
+                    xml:space="preserve"
+                    class="w-6 h-6 inline-block mr-2"
+                  >
+                    <g>
+                      <path
+                        d="m492.668 211.489-208.84-.01c-9.222 0-16.697 7.474-16.697 16.696v66.715c0 9.22 7.475 16.696 16.696 16.696h117.606c-12.878 33.421-36.914 61.41-67.58 79.194L384 477.589c80.442-46.523 128-128.152 128-219.53 0-13.011-.959-22.312-2.877-32.785-1.458-7.957-8.366-13.785-16.455-13.785z"
+                        fill="#167ee6"
+                        data-original="#167ee6"
+                      ></path>
+                      <path
+                        d="M256 411.826c-57.554 0-107.798-31.446-134.783-77.979l-86.806 50.034C78.586 460.443 161.34 512 256 512c46.437 0 90.254-12.503 128-34.292v-.119l-50.147-86.81c-22.938 13.304-49.482 21.047-77.853 21.047z"
+                        fill="#12b347"
+                        data-original="#12b347"
+                      ></path>
+                      <path
+                        d="M384 477.708v-.119l-50.147-86.81c-22.938 13.303-49.48 21.047-77.853 21.047V512c46.437 0 90.256-12.503 128-34.292z"
+                        fill="#0f993e"
+                        data-original="#0f993e"
+                      ></path>
+                      <path
+                        d="M100.174 256c0-28.369 7.742-54.91 21.043-77.847l-86.806-50.034C12.502 165.746 0 209.444 0 256s12.502 90.254 34.411 127.881l86.806-50.034c-13.301-22.937-21.043-49.478-21.043-77.847z"
+                        fill="#ffd500"
+                        data-original="#ffd500"
+                        class=""
+                      ></path>
+                      <path
+                        d="M256 100.174c37.531 0 72.005 13.336 98.932 35.519 6.643 5.472 16.298 5.077 22.383-1.008l47.27-47.27c6.904-6.904 6.412-18.205-.963-24.603C378.507 23.673 319.807 0 256 0 161.34 0 78.586 51.557 34.411 128.119l86.806 50.034c26.985-46.533 77.229-77.979 134.783-77.979z"
+                        fill="#ff4b26"
+                        data-original="#ff4b26"
+                      ></path>
+                      <path
+                        d="M354.932 135.693c6.643 5.472 16.299 5.077 22.383-1.008l47.27-47.27c6.903-6.904 6.411-18.205-.963-24.603C378.507 23.672 319.807 0 256 0v100.174c37.53 0 72.005 13.336 98.932 35.519z"
+                        fill="#d93f21"
+                        data-original="#d93f21"
+                        class=""
+                      ></path>
+                    </g>
+                  </svg>
+                  Sign in with Google
+                </button>
+              </div>
+              <p class="text-sm font-light text-gray-dark">
+                Don't have an account yet?
+                <a routerLink="/sign-up" class="font-semibold hover:underline"
+                  >Sign up</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="lg:flex-auto flex-1 lg:w-1/2">
     <div class="hidden lg:block bg-black rounded-3xl my-4 mx-4">
-      <h3 class="font-display text-white font-bold text-6xl mb-8 px-6 py-4">
+      <h3 class="font-display text-white font-bold text-7xl mb-8 px-6 py-6">
         Invest in Your Future with Holdz
       </h3>
-      <a class="bg-white" (click)="authService.GoogleAuth()">
-        sign in with google
-      </a>
-      <img src="assets/images/signup.svg" alt="" class="w-full" />
+      <img src="assets/images/signup.svg" alt="" class="w-full m-0" />
     </div>
   </div>
 </div>
