@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  [x: string]: any;
+  
   constructor(public authService: AuthService) {}
   ngOnInit(): void {}
   userEmail: string = '';

@@ -8,6 +8,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
   constructor(public authService: AuthService) {}
-
+  userEmail: string = '';
+  userPassword: string = '';
+  userFullName: string = '';
+  showPassword: boolean = false;
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   ngOnInit() {}
+
+  onSubmit() {
+    this.authService.SignUp(this.userEmail, this.userPassword);
+  }
 }

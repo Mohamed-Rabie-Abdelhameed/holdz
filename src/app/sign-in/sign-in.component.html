@@ -1,103 +1,5 @@
-<!-- <div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock flex-column items-center justify-center w-fit mx-auto">
-      <h3 class="font-display font-bold text-5xl">Sign in to Holdz</h3>
-      <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Username"
-          #userName
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPassword
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Log in"
-          (click)="authService.SignIn(userName.value, userPassword.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-      <div class="forgotPassword">
-        <span routerLink="/forgot-password">Forgot Password?</span>
-      </div>
-    </div>
-    <div class="redirectToLogin text-gray-dark">
-      <span
-        >Don't have an account?<span class="redirect text-black font-bold" routerLink="/sign-up">
-          Sign Up</span
-        ></span
-      >
-    </div>
-  </div>
-</div> -->
-
 <div class="lg:flex flex-column">
   <div class="lg:flex-auto flex-1 lg:w-1/2">
-    <!-- <div class="flex-column bg-gray rounded-3xl my-4 mx-4 px-12 py-6">
-      <img
-        src="assets/images/logo.svg"
-        alt="holdz logo"
-        class="w-24 h-24 mb-8"
-      />
-      <h3 class="font-display font-bold text-3xl mb-4">Sign In</h3>
-      <p class="font-sans text-lg text-gray-dark ">Sign in to your account to access your portfolio.</p>
-      <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Email"
-          #userEmail
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPassword
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Log in"
-          (click)="authService.SignIn(userEmail.value, userPassword.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-      <div class="forgotPassword">
-        <span routerLink="/forgot-password">Forgot Password?</span>
-      </div>
-
-      <div class="redirectToLogin text-gray-dark">
-        <span
-          >Don't have an account?<span class="redirect text-black font-bold" routerLink="/sign-up">
-            Sign Up</span
-          ></span
-        >
-        </div>
-    </div> -->
-
     <section class="lg:my-4 lg:mx-4 rounded-3xl">
       <div
         class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
@@ -174,7 +76,6 @@
                   class="text-sm text-gray-dark hover:underline absolute right-0 top-8 mt-1.5 mr-4"
                   (click)="togglePasswordVisibility()"
                 >
-                  <!-- {{ showPassword ? "Hide Password" : "Show Password" }} -->
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     version="1.1"
@@ -331,7 +232,7 @@
       <h3 class="font-display text-white font-bold text-7xl mb-8 px-6 py-6">
         Invest in Your Future with Holdz
       </h3>
-      <img src="assets/images/signup.svg" alt="" class="w-full m-0" />
+      <img src="assets/images/signin.svg" alt="" class="w-full m-0" />
     </div>
   </div>
 </div>
