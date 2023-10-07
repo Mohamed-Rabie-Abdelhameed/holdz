@@ -4,11 +4,13 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
-export class ForgotPasswordComponent implements OnInit{
+export class ForgotPasswordComponent implements OnInit {
   constructor(public authService: AuthService) {}
-
+  passwordResetEmail: string = '';
   ngOnInit() {}
-
+  onSubmit() {
+    this.authService.ForgotPassword(this.passwordResetEmail);
+  }
 }
