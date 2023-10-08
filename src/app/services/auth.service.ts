@@ -60,13 +60,13 @@ export class AuthService {
   }
 
   AuthLogin(provider) {
-    return auth.signInWithPopup(this.auth, provider, auth.browserPopupRedirectResolver)
+    return auth
+      .signInWithPopup(this.auth, provider, auth.browserPopupRedirectResolver)
       .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
-      
       })
       .catch((error) => {
         console.log(error);
@@ -74,15 +74,18 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string) {
-    console.log(email);
+  SignUp(email: string, password: string, displayName: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then(async (result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
+        await result.user.updateProfile({
+          displayName: displayName,
+        });
         this.SetUserData(result.user);
+        this.router.navigate(['verify-email-address']);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -124,7 +127,6 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {
@@ -135,7 +137,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['home']);
     });
   }
 }

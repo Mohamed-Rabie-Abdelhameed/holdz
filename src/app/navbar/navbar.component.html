@@ -107,29 +107,30 @@
           <div class="flex space-x-3 items-baseline">
             <a
               routerLink="/home"
-              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-md font-medium"
               routerLinkActive="active"
               >Home</a
             >
             <a
               routerLink="/favorites"
-              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-md font-medium"
               routerLinkActive="active"
               >Favorites</a
             >
             <a
               routerLink="/about"
-              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-md font-medium"
               routerLinkActive="active"
               >About</a
             >
             <a
               routerLink="/help"
-              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-sm font-medium"
+              class="text-black font-sans hover:text-gray-dark rounded-md px-3 py-2 text-md font-medium"
               routerLinkActive="active"
               >Help</a
             >
             <a
+              *ngIf="!authService.isLoggedIn"
               class="bg-gray text-black py-2 px-4 rounded-md"
               routerLink="/sign-in"
             >
@@ -140,55 +141,28 @@
               href="https://play.google.com/store/apps"
               target="_blank"
               rel="noopener noreferrer"
+              *ngIf="!authService.isLoggedIn"
             >
               Get the App
+            </a>
+            <a
+              class="bg-gray font-semibold font-display text-black p-2 rounded-full"
+              *ngIf="authService.isLoggedIn"
+              routerLink="/profile"
+            >
+              {{ getUserInitials() }}
             </a>
           </div>
         </div>
       </div>
-
       <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-        <!-- Mobile search button-->
-        <button
-          type="button"
-          class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="search-bar"
-          aria-expanded="false"
-          (click)="toggleSearch()"
+        <a
+          class="bg-gray font-semibold font-display text-black p-2 ml-2 rounded-full"
+          *ngIf="authService.isLoggedIn"
+          routerLink="/profile"
         >
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open search bar</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="black"
-            class="w-8 h-8"
-            [ngClass]="isSearchOpen ? 'hidden' : 'block'"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-          <svg
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="black"
-            aria-hidden="true"
-            [ngClass]="isSearchOpen ? 'block' : 'hidden'"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+          {{ getUserInitials() }}
+        </a>
       </div>
     </div>
   </div>
@@ -229,53 +203,52 @@
           class="bg-gray text-black ml-2 py-2 px-4 rounded-md"
           routerLink="/sign-in"
           (click)="toggleMenu()"
+          *ngIf="!authService.isLoggedIn"
         >
           Login
         </a>
         <a
           class="bg-black text-white py-2 px-4 rounded-md"
-          href="https://play.google.com/store/apps"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
           (click)="toggleMenu()"
+          *ngIf="!authService.isLoggedIn"
         >
           Get the App
         </a>
+        <div id="search-bar" class="px-2 sm:hidden w-full">
+          <form method="GET">
+            <div class="relative text-black focus-within:text-black">
+              <span class="absolute inset-y-0 left-0 flex items-center">
+                <button
+                  type="submit"
+                  class="focus:outline-none focus:shadow-outline"
+                >
+                  <svg
+                    fill="none"
+                    stroke="black"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    class="pl-2 mr-4 w-8 h-8"
+                  >
+                    <path
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                </button>
+              </span>
+              <input
+                type="search"
+                name="q"
+                class="py-2 text-md text-black bg-gray pl-10 focus:outline-none rounded-2xl w-full pr-2"
+                placeholder="Search for symbol ex, AAPL"
+                autocomplete="off"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- search icon on small screens -->
-  <div
-    id="search-bar"
-    class="px-4 sm:hidden"
-    [ngClass]="isSearchOpen ? 'block' : 'hidden'"
-  >
-    <form method="GET">
-      <div class="relative text-black focus-within:text-black">
-        <span class="absolute inset-y-0 left-0 flex items-center">
-          <button type="submit" class="focus:outline-none focus:shadow-outline">
-            <svg
-              fill="none"
-              stroke="black"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              class="pl-2 mr-4 w-8 h-8"
-            >
-              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </button>
-        </span>
-        <input
-          type="search"
-          name="q"
-          class="py-2 text-md text-black bg-gray pl-10 focus:outline-none rounded-2xl w-full pr-2"
-          placeholder="Search for symbol ex, AAPL"
-          autocomplete="off"
-        />
-      </div>
-    </form>
   </div>
 </nav>

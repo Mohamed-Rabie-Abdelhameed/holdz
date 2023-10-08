@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +8,22 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   isMenuOpen = false;
-  isSearchOpen = false;
+  constructor(public authService: AuthService) {}
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  toggleSearch() {
-    this.isSearchOpen = !this.isSearchOpen;
+  getUserInitials(): string {
+    if (!this.authService.userData || !this.authService.userData.displayName) {
+      return '';
+    }
+    const nameParts = this.authService.userData.displayName.split(' ');
+    if (nameParts.length < 2) {
+      return '';
+    }
+    const initials = nameParts
+      .slice(0, 2)
+      .map((name) => name[0])
+      .join('');
+    return initials;
   }
 }
