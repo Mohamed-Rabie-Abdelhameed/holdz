@@ -140,4 +140,19 @@ export class AuthService {
       this.router.navigate(['home']);
     });
   }
+
+  getUserInitials(): string {
+    if (!this.userData || !this.userData.displayName) {
+      return '';
+    }
+    const nameParts = this.userData.displayName.split(' ');
+    if (nameParts.length < 2) {
+      return '';
+    }
+    const initials = nameParts
+      .slice(0, 2)
+      .map((name) => name[0])
+      .join('');
+    return initials;
+  }
 }

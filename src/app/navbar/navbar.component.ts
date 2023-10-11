@@ -12,18 +12,4 @@ export class NavbarComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  getUserInitials(): string {
-    if (!this.authService.userData || !this.authService.userData.displayName) {
-      return '';
-    }
-    const nameParts = this.authService.userData.displayName.split(' ');
-    if (nameParts.length < 2) {
-      return '';
-    }
-    const initials = nameParts
-      .slice(0, 2)
-      .map((name) => name[0])
-      .join('');
-    return initials;
-  }
 }
