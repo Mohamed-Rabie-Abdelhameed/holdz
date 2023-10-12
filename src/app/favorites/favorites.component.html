@@ -1,0 +1,87 @@
+<!-- empty state -->
+<div *ngIf="authService.getUserFavorites().length==0" class="my-10">
+  <img
+    src="assets/images/empty1.svg"
+    alt="No favorites found"
+    class="lg:w-1/4 md:w-1/3 sm:w-1/2 mx-auto grayscale"
+  />
+  <h1 class="text-center text-2xl font-bold mt-5">
+    You don't have any favorites yet
+  </h1>
+
+  <p class="text-center text-lg text-gray-dark mt-2">
+    Add some favorites to see them here
+  </p>
+
+  <div class="flex justify-center mt-6">
+    <button
+      (click)="openSearchModal()"
+      class="bg-black hover:bg-gray-dark text-white font-bold font-display py-4 px-8 rounded-lg inline-flex items-center transition duration-150 ease-in-out focus:outline-none focus:shadow-outline"
+    >
+      Add favorites
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6 fill-gray ml-2"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+<!-- search modal -->
+<div
+  id="searchModal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="modal fixed top-0 right-0 left-0 hidden backdrop-blur-sm mx-auto z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+>
+  <div
+    class="relative top-0 left-1/2 -translate-x-1/2 translate-y-[calc(40vh)] w-full max-w-2xl max-h-full"
+  >
+    <!-- Modal content -->
+    <div class="relative bg-white shadow-lg rounded-2xl">
+      <form method="GET">
+        <div class="relative text-black focus-within:text-black">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+            <button
+              type="submit"
+              class="p-1 focus:outline-none focus:shadow-outline"
+            >
+              <svg
+                fill="none"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                class="w-6 h-6"
+              >
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </span>
+          <input
+            type="search"
+            name="q"
+            class="py-4 text-sm text-white bg-gray-dark pl-16 focus:outline-none rounded-2xl w-full pr-2"
+            placeholder="Search for symbol ex, AAPL"
+            autocomplete="off"
+            #searchInput
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="authService.getUserFavorites().length>0">
+  <div *ngFor="let favorite of authService.getUserFavorites()">
+    <app-favorite-card [favorite]="favorite"></app-favorite-card>
+  </div>
+</div>

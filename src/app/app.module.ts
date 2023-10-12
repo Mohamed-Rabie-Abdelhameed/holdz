@@ -19,6 +19,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ProfileComponent } from './profile/profile.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     ProfileComponent,
+    FavoritesComponent,
+    FavoriteCardComponent,
   ],
   imports: [
     BrowserModule,

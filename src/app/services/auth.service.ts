@@ -27,10 +27,15 @@ export class AuthService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        this.afs
+          .doc(`users/${user.uid}`)
+          .valueChanges()
+          .subscribe((userData: User) => {
+            this.userData.favorites = userData.favorites;
+          });
       } else {
         localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        this.userData = null;
       }
     });
   }
@@ -42,7 +47,6 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            // to do
             this.router.navigate(['home']);
           }
         });
@@ -128,6 +132,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       emailVerified: user.emailVerified,
+      favorites: [],
     };
     return userRef.set(userData, {
       merge: true,
@@ -154,5 +159,57 @@ export class AuthService {
       .map((name) => name[0])
       .join('');
     return initials;
+  }
+
+  getUserFavorites() {
+    if (!this.userData || !this.userData.favorites) {
+      return [];
+    }
+    return this.userData.favorites;
+  }
+
+  addUserFavorite(favorite: string) {
+    if (this.userData && this.userData.favorites) {
+      // Get the current favorites array from userData
+      let favorites = this.userData.favorites;
+
+      // Add the new favorite
+      favorites.push(favorite);
+
+      // Update the userData with the modified favorites array
+      this.userData.favorites = favorites;
+
+      // Update the user data in Firestore
+      this.updateUserData(this.userData);
+    }
+  }
+
+  removeUserFavorite(favorite: string) {
+    if (!this.userData || !this.userData.favorites) {
+      return;
+    }
+    const favorites = this.userData.favorites.filter(
+      (f: string) => f !== favorite
+    );
+    this.updateUserData({
+      ...this.userData,
+      favorites,
+    });
+  }
+
+  updateUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      emailVerified: user.emailVerified,
+      favorites: user.favorites,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
 }
