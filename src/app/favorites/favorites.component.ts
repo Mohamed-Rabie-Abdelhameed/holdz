@@ -12,11 +12,10 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css'],
 })
-export class FavoritesComponent  {
+export class FavoritesComponent {
   constructor(public authService: AuthService, private renderer: Renderer2) {}
 
   @ViewChild('searchInput') searchInput: ElementRef;
-
 
   removeFavorite(favorite: string) {
     this.authService.removeUserFavorite(favorite);

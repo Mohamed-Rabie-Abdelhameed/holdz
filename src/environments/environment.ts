@@ -9,4 +9,7 @@ export const environment = {
     appId: '1:602862618587:web:95354961a68aa79e1889fe',
     measurementId: 'G-CCK89MS04M',
   },
+  twelveData:{
+    apiKey: '4a97791e882d4b979a87f827029d06bd'
+  }
 };
