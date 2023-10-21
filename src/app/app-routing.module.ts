@@ -7,6 +7,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { StockComponent } from './stock/stock.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'stock/:symbol', component: StockComponent },
   { path: '**', component: HomeComponent },
 ];
 

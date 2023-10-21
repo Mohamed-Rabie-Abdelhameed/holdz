@@ -26,4 +26,10 @@ export class StockService {
       `https://api.twelvedata.com/symbol_search?symbol=${searchQuery}&apikey=${this.apiKey}`
     ).then((response) => response.json());
   }
+
+  getStockLogo(stockSymbol: string) {
+    return fetch(
+      `https://api.twelvedata.com/logo?symbol=${stockSymbol}&apikey=${this.apiKey}`
+    ).then((response) => response.json().then((data) => data.url));
+  }
 }

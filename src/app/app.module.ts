@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
+import { StockComponent } from './stock/stock.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
     ProfileComponent,
     FavoritesComponent,
     FavoriteCardComponent,
+    StockComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
