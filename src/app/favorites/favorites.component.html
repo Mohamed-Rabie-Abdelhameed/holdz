@@ -1,5 +1,5 @@
 <!-- empty state -->
-<div *ngIf="authService.getUserFavorites().length==0" class="my-10">
+<div *ngIf="authService.getUserFavorites().length == 0" class="my-10">
   <img
     src="assets/images/empty1.svg"
     alt="No favorites found"
@@ -73,14 +73,43 @@
             placeholder="Search for symbol ex, AAPL"
             autocomplete="off"
             #searchInput
+            [(ngModel)]="searchQuery"
+            (input)="searchStocks()"
           />
         </div>
       </form>
+      <div
+        class="border-1 border-gray z-10 my-4 mt-16 absolute top-0 left-0 right-0 max-w-4xl"
+        *ngIf="searchResults.length > 0"
+      >
+        <ul
+          class="bg-gray-dark text-white rounded-2xl max-h-72 overflow-y-scroll no-scrollbar p-2"
+        >
+          <li
+            class="my-2 py-4 px-6 hover:cursor-pointer hover:bg-black rounded-xl"
+            *ngFor="let stock of searchResults"
+            routerLink="/stock/{{ stock.symbol }}"
+            (click)="searchQuery = ''; searchResults = []"
+          >
+            <div class="flex">
+              <p class="font-semibold text-lg w-1/3">
+                {{ stock.symbol }}
+              </p>
+              <p class="text-lg w-1/3">
+                {{ stock.instrument_name }}
+              </p>
+              <p class="text-gray text-lg w-1/3">
+                {{ stock.exchange }}
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="authService.getUserFavorites().length>0">
+<div *ngIf="authService.getUserFavorites().length > 0">
   <div *ngFor="let favorite of authService.getUserFavorites()">
     <app-favorite-card [favorite]="favorite"></app-favorite-card>
   </div>

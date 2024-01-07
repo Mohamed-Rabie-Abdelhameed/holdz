@@ -92,6 +92,7 @@
                   </button>
                 </span>
                 <input
+                  id="search-bar"
                   type="search"
                   name="q"
                   class="py-2 text-sm text-black bg-gray pl-10 focus:outline-none rounded-2xl lg:w-64 md:w-44 pr-2"
@@ -103,7 +104,7 @@
               </div>
             </form>
             <div
-              class="my-4 mt-16 absolute top-0 left-0 right-0 translate-x-36 max-w-2xl"
+              class="border-1 border-gray-dark z-10 my-4 mt-16 absolute top-0 left-0 right-0 translate-x-36 max-w-2xl"
               *ngIf="searchResults.length > 0"
             >
               <ul
