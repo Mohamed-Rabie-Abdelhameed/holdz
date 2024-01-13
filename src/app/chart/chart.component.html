@@ -1,3 +1,2 @@
-<div class="chart-container">
-    <canvas  id="MyChart" >{{ chart }}</canvas>
-</div>
+<p *ngIf="!chartData">No data to display</p>
+<p-chart *ngIf="chartData.length>0" type="line" [data]="data" [options]="options"></p-chart>

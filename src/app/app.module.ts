@@ -23,6 +23,9 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
 import { StockComponent } from './stock/stock.component';
 import { ChartComponent } from './chart/chart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { ChartComponent } from './chart/chart.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -191,10 +191,15 @@ export class AuthService {
     const favorites = this.userData.favorites.filter(
       (f: string) => f !== favorite
     );
-    this.updateUserData({
-      ...this.userData,
-      favorites,
-    });
+    this.userData.favorites = favorites;
+    this.updateUserData(this.userData);
+  }
+
+  isUserFavorite(favorite: string) {
+    if (!this.userData || !this.userData.favorites) {
+      return false;
+    }
+    return this.userData.favorites.includes(favorite);
   }
 
   updateUserData(user: any) {

@@ -10,6 +10,7 @@ module.exports = {
         white: "#fefefe",
         yellow: "#f5ec47",
         red: "#f6685d",
+        green: "#98FB98",
       },
       fontFamily: {
         sans: ["alice", "sans-serif"],

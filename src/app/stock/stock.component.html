@@ -1,3 +1,99 @@
-<p>stock works!</p>
-<img [src]="stockLogo" alt="">
-<app-chart></app-chart>
+<div class="bg-white mx-auto max-w-7xl px-2 py-2 sm:px-6 lg:py-8 lg:px-8">
+  <div
+    class="flex flex-col gap-8 px-4 md:px-10 py-6 md:py-8 bg-gray rounded-2xl relative"
+  >
+    <div class="md:items-center flex flex-col md:flex-row gap-6">
+      <img
+        *ngIf="stockLogo"
+        class="w-12 h-12"
+        src="{{ stockLogo }}"
+        alt="{{ stockData.name }}"
+      />
+      <div>
+        <h1 class="text-3xl font-bold font-display">
+          {{ stockData.name }} ({{ stockData.symbol }})
+        </h1>
+        <p class="text-lg text-gray-dark">
+          {{ stockData.exchange }} - {{ stockData.currency }}
+        </p>
+      </div>
+    </div>
+
+    <div class="md:items-center flex flex-col md:flex-row gap-6">
+      <h2 class="text-4xl md:text-6xl font-bold">
+        ${{ formatPrice(stockData.close) }}
+      </h2>
+      <div class="flex items-center gap-4">
+        <span
+          class="text-xl rounded-xl px-3 py-2"
+          [ngClass]="{
+            'bg-green ': stockData.change > 0,
+            'bg-red ': stockData.change < 0
+          }"
+        >
+          {{ formatPrice(stockData.percent_change) }}%
+        </span>
+        <span
+          class="text-xl rounded-xl px-3 py-2"
+          [ngClass]="{
+            'bg-green ': stockData.change > 0,
+            'bg-red ': stockData.change < 0
+          }"
+        >
+          <i
+            class="mr-1 pi"
+            [ngClass]="{
+              'pi-angle-double-up': stockData.change > 0,
+              'pi-angle-double-down': stockData.change < 0
+            }"
+          ></i>
+          ${{ formatPrice(stockData.change) }}
+        </span>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-4 md:p-8">
+      <app-chart [symbol]="symbol" [change]="change"></app-chart>
+    </div>
+    <div
+      class="flex items-center justify-between gap-4 px-4 md:px-12 py-3 bg-white rounded-xl text-xl"
+    >
+      <p class="text-xl text-gray-dark">
+        Open
+        <span class="ml-1 font-bold text-black">{{
+          formatPrice(stockData.open)
+        }}</span>
+      </p>
+      <p class="text-gray-dark">.</p>
+      <p class="text-gray-dark">
+        High
+        <span class="ml-1 font-bold text-black">{{
+          formatPrice(stockData.high)
+        }}</span>
+      </p>
+      <p class="text-gray-dark">.</p>
+      <p class="text-gray-dark">
+        Low
+        <span class="ml-1 font-bold text-black">{{
+          formatPrice(stockData.low)
+        }}</span>
+      </p>
+      <p class="hidden md:block text-gray-dark">.</p>
+      <p class="hidden md:block text-gray-dark">
+        Volume
+        <span class="ml-1 font-bold text-black">{{
+          formatPrice(stockData.volume)
+        }}</span>
+      </p>
+    </div>
+
+    <i
+      class="absolute cursor-pointer p-2 bg-white text-gray-dark rounded-full top-6 md:top-8 right-4 md:right-10 pi pi-bolt text-3xl"
+      [ngClass]="{
+        'bg-black text-yellow': authService.isUserFavorite(symbol),
+        'bg-white text-gray-dark': !authService.isUserFavorite(symbol)
+      }"
+      (click)="authService.isLoggedIn ? toggleFavorite() : showLogin()"
+    ></i>
+  </div>
+</div>

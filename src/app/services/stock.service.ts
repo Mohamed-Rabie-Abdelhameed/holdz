@@ -16,8 +16,11 @@ export class StockService {
   }
 
   getStockChartData(stockSymbol: string) {
+    // return fetch(
+    //   'sfsdfs'
+    // ).then((response) => response.json());
     return fetch(
-      `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=1day&apikey=${this.apiKey}`
+      `https://api.twelvedata.com/time_series?symbol=${stockSymbol}&interval=15min&apikey=${this.apiKey}`
     ).then((response) => response.json());
   }
 

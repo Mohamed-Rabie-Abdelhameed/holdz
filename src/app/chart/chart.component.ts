@@ -1,47 +1,96 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js/auto';
+import { Component, Input, OnInit } from '@angular/core';
+import { StockService } from '../services/stock.service';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  styleUrls: ['./chart.component.css'],
 })
-export class ChartComponent implements OnInit{
-  public chart: any ;
+export class ChartComponent implements OnInit {
+  @Input() symbol: string;
+  @Input() change: number;
+  chartData = [];
+  chartLabels = [];
+  data: any;
 
-  constructor() { }
+  options: any;
+  constructor(private stockAPI: StockService) {}
 
   ngOnInit(): void {
-    this.createChart();
+    if (this.symbol) {
+      this.stockAPI.getStockChartData(this.symbol).then((data) => {
+        this.chartData = this.extractValues(data.values);
+        this.chartLabels = this.extractLabels(data.values);
+        this.updateChart();
+      });
+    }
   }
 
-  createChart(){
-  
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
+  updateChart() {
+    this.data = {
+      labels: this.chartLabels,
+      datasets: [
+        {
+          data: this.chartData,
+          fill: false,
+          borderColor:
+            this.change == 0
+              ? '#020202'
+              : this.change > 0
+              ? '#98FB98'
+              : '#f6685d',
+          tension: 0.4,
+        },
+      ],
+    };
 
-      data: {// values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	       datasets: [
-          {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92',
-								 '574', '573', '576'],
-            backgroundColor: 'blue'
+    this.options = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      plugins: {
+        legend: {
+          display: false,
+          labels: {
+            color: '#616161',
           },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17',
-									 '0.00', '538', '541'],
-            backgroundColor: 'limegreen'
-          }  
-        ]
+        },
       },
-      options: {
-        aspectRatio:2.5
-      }
-      
-    });
+      scales: {
+        x: {
+          ticks: {
+            color: '#616161',
+          },
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          ticks: {
+            color: '#616161',
+          },
+        },
+      },
+    };
+  }
+
+  extractLabels(data: any[]): string[] {
+    const labels = data.map((item) => this.extractTime(item.datetime));
+    console.log(labels);
+    labels.reverse();
+    return labels.slice(4);
+  }
+
+  extractValues(data: any[]): number[] {
+    const values = data.map((item) => parseFloat(item.close));
+    console.log(values);
+    values.reverse();
+    return values.slice(4);
+  }
+
+  extractTime(dateTime: string): string {
+    const dateTimeParts = dateTime.split(' ');
+    const timeParts = dateTimeParts[1].split(':');
+    const time = `${timeParts[0]}:${timeParts[1]}`;
+    return time;
   }
 }
