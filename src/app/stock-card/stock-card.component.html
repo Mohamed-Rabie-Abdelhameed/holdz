@@ -1,0 +1,22 @@
+<div
+  class="flex flex-col gap-20 justify-between bg-gray rounded-xl px-4 py-4"
+  *ngIf="!isLoading"
+  [routerLink]="'/stock/' + symbol"
+>
+  <div class="flex gap-2">
+    <img
+      src="{{ stockLogo }}"
+      alt="{{ stockData.name }}"
+      class="w-12 h-12 rounded-xl p-1 "
+    />
+    <div>
+      <h1 class="text-xl font-display font-semibold">{{ stockData.name }} - {{ symbol }}</h1>
+
+    </div>
+  </div>
+
+  <div class="flex">
+    <p class="text-2xl font-bold">${{ formatNumber(stockData.close) }}</p>
+    <p class="text-gray-500">{{ formatNumber(stockData.change) }}</p>
+  </div>
+</div>

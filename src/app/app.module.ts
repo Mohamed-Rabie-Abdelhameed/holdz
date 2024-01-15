@@ -26,6 +26,7 @@ import { ChartComponent } from './chart/chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
+import { StockCardComponent } from './stock-card/stock-card.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ChartModule } from 'primeng/chart';
     FavoriteCardComponent,
     StockComponent,
     ChartComponent,
+    StockCardComponent,
   ],
   imports: [
     BrowserModule,

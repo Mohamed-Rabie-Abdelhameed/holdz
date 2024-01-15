@@ -109,8 +109,29 @@
   </div>
 </div>
 
-<div *ngIf="authService.getUserFavorites().length > 0">
-  <div *ngFor="let favorite of authService.getUserFavorites()">
-    <app-favorite-card [favorite]="favorite"></app-favorite-card>
+<div
+  class="bg-white mx-auto max-w-7xl px-2 py-2 sm:px-6 lg:py-8 lg:px-8"
+  *ngIf="authService.getUserFavorites().length > 0"
+>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  >
+    <div
+  
+      *ngFor="let favorite of authService.getUserFavorites()"
+    >
+      <app-stock-card [symbol]="favorite"></app-stock-card>
+    </div>
   </div>
 </div>
+
+<!-- <div
+  class="bg-white mx-auto max-w-7xl px-2 py-2 sm:px-6 lg:py-8 lg:px-8"
+  *ngIf="authService.getUserFavorites().length > 0"
+>
+  <div class="px-4 md:px-10 py-6 md:py-4 rounded-2xl">
+    <div class="my-6" *ngFor="let favorite of authService.getUserFavorites()">
+      <app-stock-card [symbol]="favorite"></app-stock-card>
+    </div>
+  </div>
+</div> -->
