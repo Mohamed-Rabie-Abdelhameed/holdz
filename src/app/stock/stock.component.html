@@ -53,30 +53,30 @@
     </div>
 
     <div class="bg-white rounded-xl p-4 md:p-8">
-      <app-chart [symbol]="symbol" [change]="change"></app-chart>
+      <app-chart [change]="change"></app-chart>
     </div>
     <div
       class="flex items-center justify-between gap-4 px-4 md:px-12 py-3 bg-white rounded-xl text-xl"
     >
       <p class="text-xl text-gray-dark">
         Open
-        <span class="ml-1 font-bold text-black">{{
-          formatPrice(stockData.open)
-        }}</span>
+        <span class="ml-1 font-bold text-black"
+          >${{ formatPrice(stockData.open) }}</span
+        >
       </p>
       <p class="text-gray-dark">.</p>
       <p class="text-gray-dark">
         High
-        <span class="ml-1 font-bold text-black">{{
-          formatPrice(stockData.high)
-        }}</span>
+        <span class="ml-1 font-bold text-black"
+          >${{ formatPrice(stockData.high) }}</span
+        >
       </p>
       <p class="text-gray-dark">.</p>
       <p class="text-gray-dark">
         Low
-        <span class="ml-1 font-bold text-black">{{
-          formatPrice(stockData.low)
-        }}</span>
+        <span class="ml-1 font-bold text-black"
+          >${{ formatPrice(stockData.low) }}</span
+        >
       </p>
       <p class="hidden md:block text-gray-dark">.</p>
       <p class="hidden md:block text-gray-dark">
@@ -85,6 +85,48 @@
           formatPrice(stockData.volume)
         }}</span>
       </p>
+    </div>
+
+    <div class="flex-col px-4 md:px-12 md:py-6 py-4 bg-white rounded-xl">
+      <h3 class="font-bold text-5xl mb-8">52 Weeks</h3>
+      <div class="md:flex flex-column items-center justify-between gap-4">
+        <div
+          class="md:w-1/3 bg-black rounded-xl px-6 py-6 flex flex-col gap-20"
+        >
+          <p class="text-3xl font-semibold font-display text-yellow">
+            Price Range
+          </p>
+          <p class="text-2xl text-gray">
+            ${{ formatPrice(stockData.fifty_two_week.low) }}
+            <i class="mx-4 text-yellow pi pi-ellipsis-h"></i> ${{
+              formatPrice(stockData.fifty_two_week.high)
+            }}
+          </p>
+        </div>
+        <div
+          class="md:w-1/3 my-4 md:my-0 bg-black rounded-xl px-6 py-6 flex flex-col gap-20"
+        >
+          <p class="text-3xl font-semibold font-display text-yellow">
+            Low Change
+          </p>
+
+          <p class="text-2xl text-gray">
+            ${{ formatPrice(stockData.fifty_two_week.high_change) }}
+            <i class="mx-4 text-yellow pi pi-angle-double-down"></i>
+          </p>
+        </div>
+        <div
+          class="md:w-1/3 bg-black rounded-xl px-6 py-6 flex flex-col gap-20"
+        >
+          <p class="text-3xl font-semibold font-display text-yellow">
+            High Change
+          </p>
+          <p class="text-2xl text-gray">
+            ${{ formatPrice(stockData.fifty_two_week.low_change) }}
+            <i class="mx-4 text-yellow pi pi-angle-double-up"></i>
+          </p>
+        </div>
+      </div>
     </div>
 
     <i

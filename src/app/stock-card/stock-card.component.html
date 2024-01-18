@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col gap-20 justify-between bg-gray rounded-xl px-4 py-4"
+  class="h-full flex flex-col gap-20 justify-between bg-black rounded-xl px-6 py-6 relative hover:cursor-pointer hover:bg-gray-dark transition-all duration-300 ease-in-out"
   *ngIf="!isLoading"
   [routerLink]="'/stock/' + symbol"
 >
@@ -7,16 +7,39 @@
     <img
       src="{{ stockLogo }}"
       alt="{{ stockData.name }}"
-      class="w-12 h-12 rounded-xl p-1 "
+      class="w-16 h-16 rounded-xl p-1"
     />
     <div>
-      <h1 class="text-xl font-display font-semibold">{{ stockData.name }} - {{ symbol }}</h1>
-
+      <h2
+        class="w-36 text-2xl truncate text-ellipsis overflow-hidden font-display text-white font-semibold"
+      >
+        {{ stockData.name }}
+      </h2>
+      <p class="text-md font-display text-gray font-semibold">{{ symbol }}</p>
     </div>
   </div>
 
-  <div class="flex">
-    <p class="text-2xl font-bold">${{ formatNumber(stockData.close) }}</p>
-    <p class="text-gray-500">{{ formatNumber(stockData.change) }}</p>
+  <div class="flex justify-between">
+    <p class="text-3xl font-bold text-gray">
+      ${{ formatNumber(stockData.close) }}
+    </p>
+    <p
+      class="text-3xl text-gray"
+      [ngClass]="{
+        'text-green': stockData.change > 0,
+        'text-red': stockData.change < 0,
+        'text-gray': stockData.change === 0
+      }"
+    >
+      ${{ formatNumber(stockData.change) }}
+    </p>
   </div>
+  <i
+    class="absolute top-8 right-6 pi text-3xl"
+    [ngClass]="{
+      'pi-angle-double-up text-green': stockData.change > 0,
+      'pi-angle-double-down text-red': stockData.change < 0,
+      'pi-minus text-gray': stockData.change === 0
+    }"
+  ></i>
 </div>

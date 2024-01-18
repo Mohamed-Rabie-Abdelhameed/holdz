@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StockService } from '../services/stock.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chart',
@@ -7,23 +8,26 @@ import { StockService } from '../services/stock.service';
   styleUrls: ['./chart.component.css'],
 })
 export class ChartComponent implements OnInit {
-  @Input() symbol: string;
   @Input() change: number;
+  symbol: string;
   chartData = [];
   chartLabels = [];
   data: any;
-
   options: any;
-  constructor(private stockAPI: StockService) {}
+
+  constructor(private stockAPI: StockService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    if (this.symbol) {
-      this.stockAPI.getStockChartData(this.symbol).then((data) => {
-        this.chartData = this.extractValues(data.values);
-        this.chartLabels = this.extractLabels(data.values);
-        this.updateChart();
-      });
-    }
+    this.route.paramMap.subscribe((params) => {
+      this.symbol = params.get('symbol');
+      if (this.symbol) {
+        this.stockAPI.getStockChartData(this.symbol).then((data) => {
+          this.chartData = this.extractValues(data.values);
+          this.chartLabels = this.extractLabels(data.values);
+          this.updateChart();
+        });
+      }
+    });
   }
 
   updateChart() {
